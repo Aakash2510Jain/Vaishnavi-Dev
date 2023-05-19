@@ -1,0 +1,17 @@
+<aura:component controller="LeadController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+         
+    <aura:attribute name="LeadList" type="Lead__c[]"/>
+    <aura:attribute name="leadColumns" type="List"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <div class="size">
+        <lightning:card title="Similar Lead" iconName="standard:lead">
+           <lightning:datatable data="{! v.LeadList }"
+                         columns="{! v.leadColumns }"
+                         keyField="id"
+                         hideCheckboxColumn="true"/>
+         </lightning:card>
+    </div>
+</aura:component>
