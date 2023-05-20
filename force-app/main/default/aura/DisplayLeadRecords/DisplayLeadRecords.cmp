@@ -1,17 +1,61 @@
 <aura:component controller="LeadController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
     
-         
+    <aura:attribute name="recordId" type="String"/> 
     <aura:attribute name="LeadList" type="Lead__c[]"/>
     <aura:attribute name="leadColumns" type="List"/>
+    
+
+
     
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     
     <div class="size">
         <lightning:card title="Similar Lead" iconName="standard:lead">
-           <lightning:datatable data="{! v.LeadList }"
+           <!--<lightning:datatable data="{! v.LeadList }"
                          columns="{! v.leadColumns }"
                          keyField="id"
-                         hideCheckboxColumn="true"/>
+                         hideCheckboxColumn="true"/>-->
+            
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered"> 
+                <thead> 
+                    <tr class="slds-line-height_reset slds-text-title_caps"> 
+                        <th class="slds-is-resizable" scope="col"> 
+                            <div class="slds-truncate" title="Name"> Name </div> 
+                        </th> 
+                        <th class="slds-is-resizable" scope="col"> 
+                            <div class="slds-truncate" title="Email"> Email </div> 
+                        </th> 
+                        <th class="slds-is-resizable" scope="col"> 
+                            <div class="slds-truncate" title="Phone"> Phone </div> 
+                        </th> 
+                        <th class="slds-is-resizable" scope="col"> 
+                            <div class="slds-truncate" title="Source"> Lead Source </div> 
+                        </th> 
+                    </tr> 
+                </thead> 
+                <tbody> 
+                    
+                    <aura:iteration items="{!v.LeadList}" var = "led"> 
+                        <tr class="slds-hint-parent"> 
+                            <th data-label="Name" scope="row"> 
+                                <div class="slds-truncate" title="{!led.Name}"> 
+                                    <a target="_blank" href="{!led.hrefLink__c}">{!led.Name__c}</a> 
+                                </div> 
+                            </th> 
+                            <th data-label="Email" scope="row"> 
+                                <div class="slds-truncate" title="{!led.Email}"> {!led.Email__c} </div> 
+                            </th> 
+                            <th data-label="Phone" scope="row"> 
+                                <div class="slds-truncate" title="{!led.Phone}"> {!led.Phone__c} </div>
+                            </th>
+                            <th data-label="Phone" scope="row"> 
+                                <div class="slds-truncate" title="{!led.Source}"> {!led.Lead_Source__c} </div>
+                            </th>
+                        </tr> 
+                    </aura:iteration>
+                </tbody> 
+            </table>
+            
          </lightning:card>
     </div>
 </aura:component>
